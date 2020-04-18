@@ -10,6 +10,10 @@ services:
     privileged: true
     container_name: zdb001
     hostname: zdb001
+    networks: 
+      app_net: 
+        ipv4_address: 192.168.1.4
+
   zsv001:
     image: zabbix/zabbix-server-mysql:centos-latest
     environment:
@@ -27,6 +31,10 @@ services:
       - zdb001
     container_name: zsv001
     hostname: zsv001
+    networks: 
+      app_net: 
+        ipv4_address: 192.168.1.5
+
   zwb001:
     image: zabbix/zabbix-web-apache-mysql:centos-latest
     environment:
@@ -46,6 +54,10 @@ services:
       - zdb001
     container_name: zwb001
     hostname: zwb001
+    networks: 
+      app_net: 
+        ipv4_address: 192.168.1.6
+
   zag001:
     image: zabbix/zabbix-agent:centos-latest
     privileged: true
@@ -59,3 +71,14 @@ services:
       - zsv001
     container_name: zag001
     hostname: zag001
+    networks: 
+      app_net: 
+        ipv4_address: 192.168.1.7
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 192.168.1.0/24
