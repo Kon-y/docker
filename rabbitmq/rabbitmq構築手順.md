@@ -10,12 +10,7 @@ https://qiita.com/ptiringo/items/c554fa66f0d985394fed
 
 ## EPELのインストール(docker host)
 
-```bash
-yum install -y epel-release
-sed -i -e "s/enabled=1/enabled=0/g" /etc/yum.repos.d/epel.repo
-yum --enablerepo=epel install -y rabbitmq-server
-yum install -y jq --enablerepo=epel
-```
+C:\Users\blue_\Dropbox\99.work\自宅学習\docker\dockerhostとしての設定.md
 
 ## docker-composeのインストール(docker host)
 
