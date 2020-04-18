@@ -17,6 +17,7 @@ RUN systemctl enable nginx
 RUN systemctl enable chronyd.service
 RUN systemctl enable sshd.service
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+RUN echo root:aslinux | chpasswd
 EXPOSE 8080
 EXPOSE 22
 CMD /sbin/init
