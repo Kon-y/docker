@@ -7,7 +7,9 @@ services:
       - MYSQL_USER=zabbix
       - MYSQL_PASSWORD=zabbix
       - MYSQL_ROOT_PASSWORD=zabbix
+    privileged: true
     container_name: zdb001
+    hostname: zdb001
   zsv001:
     image: zabbix/zabbix-server-mysql:centos-latest
     environment:
@@ -17,12 +19,14 @@ services:
       - MYSQL_PASSWORD=zabbix
       - MYSQL_ROOT_PASSWORD=zabbix
       - ZBX_DEBUGLEVEL=3
+    privileged: true
     ports:
       - "10051:10051"
-      - "10022:22"
+      - "9004:22"
     links:
       - zdb001
     container_name: zsv001
+    hostname: zsv001
   zwb001:
     image: zabbix/zabbix-web-apache-mysql:centos-latest
     environment:
@@ -33,20 +37,25 @@ services:
       - MYSQL_PASSWORD=zabbix
       - MYSQL_ROOT_PASSWORD=zabbix
       - PHP_TZ=Asia/Tokyo
+    privileged: true
     ports:
-      - 8080:80
+      - "8080:80"
+      - "9007:22"
     links:
       - zsv001
       - zdb001
     container_name: zwb001
+    hostname: zwb001
   zag001:
     image: zabbix/zabbix-agent:centos-latest
     privileged: true
     environment:
       - ZBX_SERVER_HOST=zsv001
+    ports: 
+      - "9006:22"
     expose:
       - "10050"
-      - "22"
     links:
       - zsv001
     container_name: zag001
+    hostname: zag001
