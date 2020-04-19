@@ -31,4 +31,3 @@ systemctl enable chronyd.service
 
 systemctl list-unit-files --type service | egrep "(ntp|chronyd)"
  -> chronyd.service                        enabled と表示される。
-
