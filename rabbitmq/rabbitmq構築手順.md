@@ -1,5 +1,7 @@
 # インストール手順
 
+起動に失敗する：原因特定できず・・・
+
 ## 参考サイト
 
 ```url
@@ -8,22 +10,15 @@ https://blog.masu-mi.me/post/2016/09/15/rabbitmq_clustering_mirroring_config/
 https://qiita.com/ptiringo/items/c554fa66f0d985394fed
 ```
 
-## EPELのインストール(docker host)
+## dockerホストの設定
 
 C:\Users\blue_\Dropbox\99.work\自宅学習\docker\dockerhostとしての設定.md
-
-## docker-composeのインストール(docker host)
-
-```bash
-curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
 
 ## start docker-compose
 
 ```bash
 cd /mnt/c/Users/blue_/Dropbox/99.work/自宅学習/docker/docker/rabbitmq
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ## 管理画面にアクセス

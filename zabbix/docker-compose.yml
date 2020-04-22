@@ -11,8 +11,8 @@ services:
     container_name: zdb001
     hostname: zdb001
     networks: 
-      app_net: 
-        ipv4_address: 192.168.1.4
+      internal:
+        ipv4_address: 172.18.0.4
 
   zsv001:
     image: zabbix/zabbix-server-mysql:centos-latest
@@ -32,8 +32,8 @@ services:
     container_name: zsv001
     hostname: zsv001
     networks: 
-      app_net: 
-        ipv4_address: 192.168.1.5
+      internal: 
+        ipv4_address: 172.18.0.6
 
   zwb001:
     image: zabbix/zabbix-web-apache-mysql:centos-latest
@@ -55,8 +55,10 @@ services:
     container_name: zwb001
     hostname: zwb001
     networks: 
-      app_net: 
-        ipv4_address: 192.168.1.6
+      internal: 
+        ipv4_address: 172.18.0.3
+      external: 
+        ipv4_address: 172.20.0.3
 
   zag001:
     image: zabbix/zabbix-agent:centos-latest
@@ -72,13 +74,5 @@ services:
     container_name: zag001
     hostname: zag001
     networks: 
-      app_net: 
-        ipv4_address: 192.168.1.7
-
-networks:
-  app_net:
-    driver: bridge
-    ipam:
-     driver: default
-     config:
-       - subnet: 192.168.1.0/24
+      internal: 
+        ipv4_address: 172.18.0.5

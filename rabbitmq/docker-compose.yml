@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   my-queue:
@@ -13,6 +13,18 @@ services:
       - '9005:22'
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      int_net:
+        ipv4_address: 172.19.0.7
 
 volumes:
   rabbitmq-data:
+
+networks:
+  int_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.19.0.0/16
+         gateway: 172.19.0.1
