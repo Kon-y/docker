@@ -51,6 +51,7 @@ WORKDIR /var/lib/rabbitmq
 # 15672 rabbitmq-server - for management plugin
 # 4369 epmd - for clustering
 # 25672 rabbitmq-server - for clustering
+# 22 ssh
 EXPOSE 5672 15672 4369 25672 22
 
 # Add passwd template file for nss_wrapper
@@ -63,5 +64,5 @@ RUN chown -R 1001:0 /tmp/rabbitmq && chmod -R ug+rwx /tmp/rabbitmq && \
 USER 1001
 #
 # entrypoint/cmd for container
-CMD ["/tmp/rabbitmq/run-rabbitmq-server.sh"]
+CMD ["/tmp/rabbitmq/run-rabbitmq-server.sh &"]
 CMD /sbin/init
