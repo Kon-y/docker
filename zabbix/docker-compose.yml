@@ -16,6 +16,9 @@ services:
 
   zsv001:
     image: zabbix/zabbix-server-mysql:centos-latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile_zsv001
     environment:
       - DB_SERVER_HOST=zdb001
       - MYSQL_DATABASE=zabbix
@@ -24,7 +27,6 @@ services:
       - MYSQL_ROOT_PASSWORD=zabbix
       - ZBX_DEBUGLEVEL=3
     privileged: true
-    dockerfile: 
     ports:
       - "20051:10051"
       - "9004:22"
@@ -38,6 +40,9 @@ services:
 
   zwb001:
     image: zabbix/zabbix-web-apache-mysql:centos-latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile_zwb001
     environment:
       - ZBX_SERVER_HOST=zsv001
       - DB_SERVER_HOST=zdb001
@@ -47,7 +52,6 @@ services:
       - MYSQL_ROOT_PASSWORD=zabbix
       - PHP_TZ=Asia/Tokyo
     privileged: true
-    dockerfile:
     ports:
       - "8080:80"
       - "9001:22"
@@ -64,8 +68,10 @@ services:
 
   zag001:
     image: zabbix/zabbix-agent:centos-latest
+#    build:
+#      context: .
+#      dockerfile: Dockerfile_zag001
     privileged: true
-    dockerfile:
     environment:
       - ZBX_SERVER_HOST=zsv001
     ports: 
