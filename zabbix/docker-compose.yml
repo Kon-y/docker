@@ -1,7 +1,7 @@
-version: "3"
+version: "2"
 services:
   zdb001:
-    image: mariadb:10.3
+    image: mariadb:10.4
     environment:
       - MYSQL_DATABASE=zabbix
       - MYSQL_USER=zabbix
@@ -10,9 +10,9 @@ services:
     privileged: true
     container_name: zdb001
     hostname: zdb001
-    networks: 
-      internal:
-        ipv4_address: 172.18.0.4
+    networks:
+      int_net:
+        ipv4_address: 172.19.0.4
 
   zsv001:
     image: zabbix/zabbix-server-mysql:centos-latest
@@ -24,16 +24,17 @@ services:
       - MYSQL_ROOT_PASSWORD=zabbix
       - ZBX_DEBUGLEVEL=3
     privileged: true
+    dockerfile: 
     ports:
-      - "10051:10051"
+      - "20051:10051"
       - "9004:22"
     links:
       - zdb001
     container_name: zsv001
     hostname: zsv001
-    networks: 
-      internal: 
-        ipv4_address: 172.18.0.6
+    networks:
+      int_net:
+        ipv4_address: 172.19.0.6
 
   zwb001:
     image: zabbix/zabbix-web-apache-mysql:centos-latest
@@ -46,33 +47,41 @@ services:
       - MYSQL_ROOT_PASSWORD=zabbix
       - PHP_TZ=Asia/Tokyo
     privileged: true
+    dockerfile:
     ports:
       - "8080:80"
-      - "9007:22"
+      - "9001:22"
     links:
       - zsv001
       - zdb001
     container_name: zwb001
     hostname: zwb001
-    networks: 
-      internal: 
-        ipv4_address: 172.18.0.3
-      external: 
+    networks:
+      int_net:
+        ipv4_address: 172.19.0.3
+      ext_net:
         ipv4_address: 172.20.0.3
 
   zag001:
     image: zabbix/zabbix-agent:centos-latest
     privileged: true
+    dockerfile:
     environment:
       - ZBX_SERVER_HOST=zsv001
     ports: 
-      - "9006:22"
+      - "9003:22"
     expose:
       - "10050"
     links:
       - zsv001
     container_name: zag001
     hostname: zag001
-    networks: 
-      internal: 
-        ipv4_address: 172.18.0.5
+    networks:
+      int_net:
+        ipv4_address: 172.19.0.5
+
+networks:
+  int_net:
+    external: true
+  ext_net:
+    external: true
