@@ -30,6 +30,8 @@ services:
     ports:
       - "20051:10051"
       - "9004:22"
+    expose:
+      - "10051"      
     links:
       - zdb001
     container_name: zsv001
