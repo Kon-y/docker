@@ -9,6 +9,7 @@ https://yomon.hatenablog.com/entry/2018/03/29/Zabbix公式コンテナとdocker-
 
 ```docker
 cd /mnt/c/Users/blue_/Dropbox/99.work/自宅学習/docker/docker/zabbix
+sudo su -
 docker-compose up -d
 ```
 
