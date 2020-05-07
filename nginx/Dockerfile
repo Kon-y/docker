@@ -1,4 +1,4 @@
-FROM dockerkon/default-centos:20200505
+FROM dockerkon/default-centos:latest
 ENV container docker
 RUN yum -y update
 RUN yum install -y http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
