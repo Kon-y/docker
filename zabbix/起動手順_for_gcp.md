@@ -15,9 +15,8 @@ docker-compose up -d
 
 ## Web管理画面にアクセス
 
-wait on 5min
+network
 
-http://192.168.1.9:8080/
 
 Admin:zabbix
 
@@ -35,6 +34,7 @@ AgentのNICをDNSで zabbix_agent　を見るように変更します。後は�
 Creating zdb001 ... done
 Creating zsv001 ... done
 Creating zwb001 ... done
+
 
 ---
 
