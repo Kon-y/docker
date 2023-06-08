@@ -1,5 +1,4 @@
 FROM centos:centos7.1.1503
-MAINTAINER Yasunori Kon
 ENV container docker
 ENV http_proxy http://proxy.your.site.com:8080
 ENV https_proxy http://proxy.your.site.com:8080
